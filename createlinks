@@ -17,3 +17,8 @@ event_services($event, qw(
                httpd reload
                loolwsd restart
 ));
+
+$event = 'nethserver-nextcloud-update';
+event_actions($event, qw(
+             nethserver-collabora-conf 70
+));
