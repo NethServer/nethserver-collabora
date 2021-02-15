@@ -41,14 +41,14 @@ loolconfig set storage.wopi.host "$AllowWopiHosts"
 
 if [[ -n `config getprop loolwsd VirtualHost` ]]; then
 
-  #Configure Nextcloud
-  if [[ -x "/usr/share/nextcloud/occ" ]]; then
+  #Configure Nethserver-Nextcloud
+  if [[ -x "/usr/local/sbin/occ" ]]; then
 
-    sudo -u apache scl enable rh-php73 "/usr/share/nextcloud/occ app:install richdocuments"
+    /usr/local/sbin/occ app:install richdocuments
 
-    sudo -u apache scl enable rh-php73 "/usr/share/nextcloud/occ config:app:set richdocuments wopi_url --value=https:\/\/`config getprop loolwsd VirtualHost`"
+    /usr/local/sbin/occ config:app:set richdocuments wopi_url --value=https://`config getprop loolwsd VirtualHost`
 
-    sudo -u apache scl enable rh-php73 "/usr/share/nextcloud/occ app:enable richdocuments"
+    /usr/local/sbin/occ app:enable richdocuments
   fi
 
 fi
