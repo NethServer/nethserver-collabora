@@ -46,4 +46,11 @@ fi
 if [[ -x "/usr/local/sbin/occ" ]]; then
     /usr/local/sbin/occ app:install richdocuments
     /usr/local/sbin/occ app:enable richdocuments
+    if [[ -n `/sbin/e-smith/config getprop loolwsd VirtualHost` ]]; then
+        WopiUrl=`/sbin/e-smith/config getprop loolwsd VirtualHost`
+
+        /usr/local/sbin/occ config:app:set richdocuments wopi_url --value=https://$WopiUrl
+   
+        /usr/local/sbin/occ richdocuments:activate-config
+    fi
 fi
