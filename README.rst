@@ -9,12 +9,11 @@ This package provide Nethserver integration of `Collabora Online Development Edi
 First configuration
 ===================
 
-Collabora Online requires a dedicated virtual host and it's only accessible from HTTPS.  
-On installation the (default) virtual host ``collabora.server_domain`` is created, an other virtual host can be set by executing:
+Collabora Online requires a dedicated virtual host and it's only accessible from HTTPS with a valid certificate.
 
-::
+To configure Collobora Online, execute: ::
 
-  config setprop loolwsd VirtualHost loolwsd.yourdomain.com 
+  config setprop loolwsd VirtualHost collabora.yourdomain.com 
   signal-event nethserver-collabora-update
 
 It is recommended to obtain a valid HTTPS certificate for the virtual host;
@@ -26,7 +25,6 @@ note: ::
 
 The package does the following:
 
-* Create a virtual host for collabora.
 * If nethserver-nextcloud is installed on the same server:
 
   * Install and configure richdocuments-app

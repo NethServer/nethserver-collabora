@@ -1,3 +1,4 @@
+#!/bin/bash
 #
 # Copyright (C) 2021 Nethesis S.r.l.
 # http://www.nethesis.it - nethserver@nethesis.it
@@ -17,26 +18,23 @@
 # You should have received a copy of the GNU General Public License
 # along with NethServer.  If not, see COPYING.
 #
-#!/bin/bash
 
 #Configure WopiUrl for Nethserver-Nextcloud
 if [[ -x "/usr/local/sbin/occ" ]]; then
 
     if [[ -n `/sbin/e-smith/config getprop loolwsd VirtualHost` ]]; then
         WopiUrl=`/sbin/e-smith/config getprop loolwsd VirtualHost`
-    else
-        WopiUrl=collabora.`/sbin/e-smith/config get DomainName`
+
+        /usr/local/sbin/occ config:app:set richdocuments wopi_url --value=https://$WopiUrl
+        
+        /usr/bin/curl https://$WopiUrl > /dev/null 2>&1
+        if [ $? -eq 0 ]; then
+            /usr/local/sbin/occ config:app:set richdocuments disable_certificate_verification --value=''
+        else
+            /usr/local/sbin/occ config:app:set richdocuments disable_certificate_verification --value=yes
+        fi
+        
+        /usr/local/sbin/occ richdocuments:activate-config
     fi
 
-    /usr/local/sbin/occ config:app:set richdocuments wopi_url --value=https://$WopiUrl
-    
-    /usr/bin/curl https://$WopiUrl > /dev/null 2>&1
-    if [ $? -eq 0 ]; then
-        /usr/local/sbin/occ config:app:set richdocuments disable_certificate_verification --value=''
-    else
-        /usr/local/sbin/occ config:app:set richdocuments disable_certificate_verification --value=yes
-    fi
-    
-    /usr/local/sbin/occ richdocuments:activate-config
-    
 fi

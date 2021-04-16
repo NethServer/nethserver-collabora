@@ -1,5 +1,5 @@
 {
-    my $VHost = $loolwsd{'VirtualHost'} || "collabora." . $DomainName;
+    my $VHost = $loolwsd{'VirtualHost'} || "";
 
     if ($VHost ne '') {
         $OUT .= <<EOF

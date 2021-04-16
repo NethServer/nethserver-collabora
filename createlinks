@@ -21,12 +21,6 @@
 
 use esmith::Build::CreateLinks qw(:all);
 
-$event = 'certificate-update';
-event_actions($event, qw(
-             nethserver-collabora-set-wopi-url 91
-));
-
-
 my $event = 'nethserver-collabora-update';
 event_actions($event, qw(
              initialize-default-databases 00
@@ -36,12 +30,10 @@ event_actions($event, qw(
 
 event_templates($event, qw(
   /etc/httpd/conf.d/zz_collabora.conf
-  /etc/hosts
 ));
 
 event_services($event, qw(
                httpd reload
-               dnsmasq restart
                loolwsd restart
 ));
 
