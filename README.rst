@@ -74,3 +74,15 @@ After installation, admin dashboard can be enabled with : ::
 And is accessible at: ::
 
   https://collabora.yourdomain.com/loleaflet/dist/admin/admin.html
+
+
+Collabora repository
+====================
+
+Update from CODE repository: ::
+
+  yum install yum-utils
+  yum-config-manager --add-repo https://www.collaboraoffice.com/repos/CollaboraOnline/CODE-centos7
+  wget https://www.collaboraoffice.com/repos/CollaboraOnline/CODE-centos7/repodata/repomd.xml.key && rpm --import repomd.xml.key
+  yum update -y --enablerepo=collaboraoffice.com_repos_CollaboraOnline_CODE-centos7
+
