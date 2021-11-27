@@ -1,0 +1,6 @@
+{
+    my $loolwsd = $DB->get("loolwsd") or return;
+    my $coolwsd = $DB->get("coolwsd") || $DB->new_record("coolwsd", { type => "service" });
+    $coolwsd->merge_props($popd->props);
+    $loolwsd->delete;
+}

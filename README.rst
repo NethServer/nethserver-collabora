@@ -13,7 +13,7 @@ Collabora Online requires a dedicated virtual host and it's only accessible from
 
 To configure Collobora Online, execute: ::
 
-  config setprop loolwsd VirtualHost collabora.yourdomain.com
+  config setprop coolwsd VirtualHost collabora.yourdomain.com
   signal-event nethserver-collabora-update
 
 After virtual host configuration, obtain a valid HTTPS certificate via Let's encrypt from ``Server certificate`` section of Server Manager interface.
@@ -27,9 +27,9 @@ The package does the following:
 Database
 ========
 
-The configuration is stored inside the ``configuration`` db, under the ``loolwsd`` key. To show it: ::
+The configuration is stored inside the ``configuration`` db, under the ``coolwsd`` key. To show it: ::
 
- config show loolwsd
+ config show coolwsd
 
 Properties:
 
@@ -38,20 +38,20 @@ Properties:
 
 examples: ::
 
-  config setprop loolwsd VirtualHost loolwsd-dev.nethserver.net AllowWopiHost nextcloud-office.yourdomain.com
-  config show loolwsd
-  loolwsd=service
+  config setprop coolwsd VirtualHost coolwsd-dev.nethserver.net AllowWopiHost nextcloud-office.yourdomain.com
+  config show coolwsd
+  coolwsd=service
     AllowWopiHost=nextcloud-office.yourdomain.com
-    VirtualHost=loolwsd-dev.nethserver.net
+    VirtualHost=coolwsd-dev.nethserver.net
     status=enable
 
 
 Admin user
 ==========
 
-After installation, admin dashboard can be enable with ``loolconfig set-admin-password`` and accessible at: ::
+After installation, admin dashboard can be enable with ``coolconfig set-admin-password`` and accessible at: ::
 
-  https://collabora.yourdomain.com/loleaflet/dist/admin/admin.html
+  https://collabora.yourdomain.com/browser/dist/admin/admin.html
 
 
 Collabora repository
