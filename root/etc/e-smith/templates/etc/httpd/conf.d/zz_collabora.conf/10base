@@ -1,8 +1,11 @@
 {
-  my $domain = $loolwsd{'VirtualHost'} || '';
+  my $domain = $coolwsd{'VirtualHost'} || '';
 
   if ($domain ne '') {
     $OUT .= "<VirtualHost *:443>\n";
+
+    $OUT .= "  Options -Indexes\n";
+
     $OUT .= "  ServerName $domain\n";
 
     $OUT .= "  SSLEngine on\n";
@@ -13,24 +16,28 @@
     $OUT .= "  # keep the host\n";
     $OUT .= "  ProxyPreserveHost On\n";
 
-    $OUT .= "  # static html, js, images, etc. served from loolwsd\n";
-    $OUT .= "  # loleaflet is the client part of LibreOffice Online\n";
-    $OUT .= "  ProxyPass           /loleaflet http://127.0.0.1:9980/loleaflet retry=0\n";
-    $OUT .= "  ProxyPassReverse    /loleaflet http://127.0.0.1:9980/loleaflet\n";
+    $OUT .= "  # static html, js, images, etc. served from coolwsd\n";
+    $OUT .= "  # browser is the client part of LibreOffice Online\n";
+    $OUT .= "  ProxyPass           /browser http://127.0.0.1:9980/browser retry=0\n";
+    $OUT .= "  ProxyPassReverse    /browser http://127.0.0.1:9980/browser\n";
 
     $OUT .= "  # WOPI discovery URL\n";
     $OUT .= "  ProxyPass           /hosting/discovery http://127.0.0.1:9980/hosting/discovery retry=0\n";
     $OUT .= "  ProxyPassReverse    /hosting/discovery http://127.0.0.1:9980/hosting/discovery\n";
 
     $OUT .= "  # Main websocket\n";
-    $OUT .= "  ProxyPassMatch \"/lool/(.*)/ws\$\" ws://127.0.0.1:9980/lool/\$1/ws nocanon\n";
+    $OUT .= "  ProxyPassMatch \"/cool/(.*)/ws\$\" ws://127.0.0.1:9980/cool/\$1/ws nocanon\n";
 
     $OUT .= "  # Admin Console websocket\n";
-    $OUT .= "  ProxyPass   /lool/adminws ws://127.0.0.1:9980/lool/adminws\n";
+    $OUT .= "  ProxyPass   /cool/adminws ws://127.0.0.1:9980/cool/adminws\n";
 
     $OUT .= "  # Download as, Fullscreen presentation and Image upload operations\n";
-    $OUT .= "  ProxyPass           /lool http://127.0.0.1:9980/lool\n";
-    $OUT .= "  ProxyPassReverse    /lool http://127.0.0.1:9980/lool\n";
+    $OUT .= "  ProxyPass           /cool http://127.0.0.1:9980/cool\n";
+    $OUT .= "  ProxyPassReverse    /cool http://127.0.0.1:9980/cool\n";
+
+    $OUT .= "  # Compatibility with integrations that use the /lool/convert-to endpoint\n";
+    $OUT .= "  ProxyPass           /lool http://127.0.0.1:9980/cool\n";
+    $OUT .= "  ProxyPassReverse    /lool http://127.0.0.1:9980/cool\n";
 
     $OUT .= "  # Endpoint with information about availability of various features\n";
     $OUT .= "  ProxyPass           /hosting/capabilities http://127.0.0.1:9980/hosting/capabilities retry=0\n";

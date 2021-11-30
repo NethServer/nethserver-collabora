@@ -20,10 +20,10 @@
 #!/bin/bash
 
 # Disable ssl
-loolconfig set ssl.enable  false
-loolconfig set ssl.termination  true
-loolconfig set net.listen loopback
-loolconfig set net.proto IPv4
+coolconfig set ssl.enable  false
+coolconfig set ssl.termination  true
+coolconfig set net.listen loopback
+coolconfig set net.proto IPv4
 
 
 #Generate a list of hosts that can access to the wopi storage
@@ -34,19 +34,19 @@ AllowWopiHosts=`hostname`
 if [[ -n `/sbin/e-smith/config getprop nextcloud VirtualHost` ]];then AllowWopiHosts+="|`/sbin/e-smith/config getprop nextcloud VirtualHost`";fi
 
 #Additional external host
-if [[ -n `/sbin/e-smith/config getprop loolwsd AllowWopiHost` ]];then AllowWopiHosts+="|`/sbin/e-smith/config getprop loolwsd AllowWopiHost`";fi
+if [[ -n `/sbin/e-smith/config getprop coolwsd AllowWopiHost` ]];then AllowWopiHosts+="|`/sbin/e-smith/config getprop coolwsd AllowWopiHost`";fi
 
-loolconfig set storage.wopi.host "$AllowWopiHosts"
+coolconfig set storage.wopi.host "$AllowWopiHosts"
 
 
-if [[ -n `/sbin/e-smith/config getprop loolwsd VirtualHost` ]]; then
+if [[ -n `/sbin/e-smith/config getprop coolwsd VirtualHost` ]]; then
 
   #Configure Nethserver-Nextcloud
   if [[ -x "/usr/local/sbin/occ" ]]; then
 
     /usr/local/sbin/occ app:install richdocuments
 
-    /usr/local/sbin/occ config:app:set richdocuments wopi_url --value=https://`/sbin/e-smith/config getprop loolwsd VirtualHost`
+    /usr/local/sbin/occ config:app:set richdocuments wopi_url --value=https://`/sbin/e-smith/config getprop coolwsd VirtualHost`
 
     /usr/local/sbin/occ app:enable richdocuments
   fi

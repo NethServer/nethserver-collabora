@@ -15,7 +15,7 @@ event_templates($event, qw(
 
 event_services($event, qw(
                httpd reload
-               loolwsd restart
+               coolwsd restart
 ));
 
 $event = 'nethserver-nextcloud-update';
