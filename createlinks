@@ -7,6 +7,7 @@ my $event = 'nethserver-collabora-update';
 event_actions($event, qw(
              initialize-default-databases 00
              nethserver-collabora-conf 20
+             nethserver-collabora-conf-php 80
 ));
 
 event_templates($event, qw(
