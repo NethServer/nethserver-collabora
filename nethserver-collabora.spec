@@ -6,7 +6,7 @@ License: GPL
 Source: %{name}-%{version}.tar.gz
 BuildArch: noarch
 
-Requires: coolwsd CODE-brand
+Requires: coolwsd CODE-brand >= 21.11
 Requires: collaboraoffice-dict-en
 
 BuildRequires: nethserver-devtools
