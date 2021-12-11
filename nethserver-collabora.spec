@@ -1,6 +1,6 @@
 Summary: Nethserver Collabora Online configuration
 Name: nethserver-collabora
-Version: 0.1.4
+Version: 0.1.5
 Release: 1%{?dist}
 License: GPL
 Source: %{name}-%{version}.tar.gz
@@ -37,6 +37,9 @@ rm -f %{name}-%{version}-%{release}-filelist
 %doc COPYING
 
 %changelog
+* Sat Dec 11 2021 mrmarkuz <31746411+mrmarkuz@users.noreply.github.com> - 0.1.5-1
+- Collabora 21.11 Update - NethServer/dev#6607
+
 * Mon May 03 2021 Stephane de Labrusse <stephdl@de-labrusse.fr> - 0.1.4-1
 - Collabora: Require collaboraoffice6.4-dict-en - NethServer/dev#6501
 
